@@ -16,12 +16,16 @@ const GroceryList = () => {
         }
     }, [groceryItems]);
 
+    const handleDelete = (id: number) => {
+        setGroceryItems((items) => items.filter((item) => item.id !== id));
+    }
+
     return (
         <div>
             {loading && <p>Chargement des données...</p>}
             <ul>
                 {groceryItems.map(item => (
-                    <GroceryListItem item={item} />
+                    <GroceryListItem item={item} onDelete={() => handleDelete(item.id)} />
                 ))}
             </ul>
         </div>
