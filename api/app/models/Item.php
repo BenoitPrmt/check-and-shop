@@ -16,4 +16,9 @@ class Item extends Model
     ];
 
     protected $fillable = ['name', 'description', 'checked'];
+
+    public function list()
+    {
+        return $this->belongsTo('GroceryList', 'list_id');
+    }
 }

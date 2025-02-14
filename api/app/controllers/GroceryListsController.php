@@ -23,7 +23,7 @@ class GroceryListsController extends Controller
     }
 
     public function getList() {
-        $lists = GroceryList::all();
+        $lists = GroceryList::with(['items'])->get();
 
         response()->json([
             'data' => $lists,
@@ -32,7 +32,7 @@ class GroceryListsController extends Controller
     }
 
     public function getById($id) {
-        $list = GroceryList::find($id);
+        $list = GroceryList::with(['items'])->find($id);
 
         if (!$list) {
             response()->json([
