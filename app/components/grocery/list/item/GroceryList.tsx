@@ -8,9 +8,13 @@ const GroceryList = () => {
     return (
         <div>
             <ul>
-                {groceryList.map((item, index) => (
-                    <GroceryListItem item={item} key={index} />
-                ))}
+                {groceryList.length === 0 ? (
+                    <p className="text-gray-400">Il n'y a rien dans cette liste...</p>
+                ) : (
+                    groceryList.map((item, index) => (
+                        <GroceryListItem item={item} key={index} />
+                    ))
+                )}
             </ul>
         </div>
     );

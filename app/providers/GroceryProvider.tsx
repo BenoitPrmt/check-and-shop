@@ -1,15 +1,20 @@
 import {type ReactNode, useEffect, useState} from "react";
 import {GroceryContext} from "~/context/GroceryContext";
-import type {GroceryItem, PartialGroceryItem} from "~/types/grocery";
-import {createItem, deleteItem, getList, updateItem} from "~/api/grocery";
+import type {GroceryItem, GroceryList, PartialGroceryItem, PartialGroceryList} from "~/types/grocery";
+import {createItem, deleteItem, getList, updateItem} from "~/api/grocery/item";
+import {createList, deleteList, getAllLists, updateList} from "~/api/grocery/list";
 
 export const GroceryProvider = ({children}: { children: ReactNode }) => {
 
     const [groceryList, setGroceryList] = useState<GroceryItem[]>([]);
+    const [groceryLists, setGroceryLists] = useState<GroceryList[]>([]);
 
     useEffect(() => {
         getList().then((items) => {
             setGroceryList(items);
+        });
+        getAllLists().then((lists) => {
+            setGroceryLists(lists);
         });
     }, []);
 
@@ -42,13 +47,36 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
             setGroceryList((items) => items.map((i) => i.id === item.id ? item : i));
         });
     }
+
+    const addGroceryList = (item: PartialGroceryList) => {
+        createList(item).then((newItem) => {
+            setGroceryLists((items) => [...items, newItem]);
+        });
+    }
+
+    const deleteGroceryList = (id: number) => {
+        deleteList(id).then(() => {
+            setGroceryLists((items) => items.filter((item) => item.id !== id));
+        });
+    }
+
+    const updateGroceryList = (item: GroceryList) => {
+        updateList(item).then(() => {
+            setGroceryLists((items) => items.map((i) => i.id === item.id ? item : i));
+        });
+    }
      
     const value = {
         groceryList,
         addGroceryItem,
         deleteGroceryItem,
         toggleGroceryItem,
-        updateGroceryItem
+        updateGroceryItem,
+
+        groceryLists,
+        addGroceryList,
+        updateGroceryList,
+        deleteGroceryList,
     };
 
     return <GroceryContext.Provider value={value}>{children}</GroceryContext.Provider>;

@@ -1,4 +1,4 @@
-import type {GroceryItem, PartialGroceryItem} from "~/types/grocery";
+import type {GroceryItem, GroceryList, PartialGroceryItem, PartialGroceryList} from "~/types/grocery";
 
 export interface GroceryContextType {
     groceryList: GroceryItem[];
@@ -6,4 +6,9 @@ export interface GroceryContextType {
     deleteGroceryItem: (id: number) => void;
     toggleGroceryItem: (item: GroceryItem) => void;
     updateGroceryItem: (item: GroceryItem) => void;
+
+    groceryLists: GroceryList[];
+    addGroceryList: (item: PartialGroceryList) => void;
+    updateGroceryList: (item: GroceryList) => void;
+    deleteGroceryList: (id: number) => void;
 }

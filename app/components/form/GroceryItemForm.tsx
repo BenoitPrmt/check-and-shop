@@ -7,6 +7,7 @@ import {Input} from "~/components/ui/input";
 import {ArrowLeftIcon, PlusIcon} from "lucide-react";
 import {Link, useNavigate} from "react-router";
 import {useGrocery} from "~/hooks/useGrocery";
+import {Checkbox} from "~/components/ui/checkbox";
 
 type Props = {
     item?: GroceryItem;
@@ -89,8 +90,13 @@ const GroceryItemForm = ({ item }: Props) => {
 
                             {item && (
                                 <div className="grid w-3/4 max-w-sm items-center gap-1.5">
-                                    <Label htmlFor="checked">Coché</Label>
-                                    <Input type="checkbox" id="checked" name="checked" defaultChecked={item.checked} />
+                                    <Checkbox
+                                        checked={itemForm.checked}
+                                        onChange={(e) => setItemForm((itemForm) => ({
+                                            ...itemForm,
+                                            checked: !itemForm.checked
+                                        }))}
+                                    />
                                 </div>
                             )}
 

@@ -2,6 +2,7 @@ import type {Route} from "./+types/home";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
 import {Button} from "~/components/ui/button";
 import GroceryItemForm from "~/components/form/GroceryItemForm";
+import GroceryListForm from "~/components/form/GroceryListForm";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -10,11 +11,11 @@ export function meta({}: Route.MetaArgs) {
     ];
 }
 
-export default function Home() {
+export default function AddList() {
     return (
-        <div className="container mx-auto pt-28 flex flex-col items-center justify-center w-1/2">
+        <div className="container mx-auto pt-28 flex flex-col items-center justify-center w-2/3">
             <div className="w-full">
-                <GroceryItemForm />
+                <GroceryListForm />
             </div>
         </div>
     );

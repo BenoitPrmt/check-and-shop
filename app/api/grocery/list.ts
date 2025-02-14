@@ -1,7 +1,7 @@
-import type {GroceryItem, PartialGroceryItem} from "~/types/grocery";
+import type {GroceryList, PartialGroceryList} from "~/types/grocery";
 
-export const getList = async (): Promise<GroceryItem[]> => {
-    return await fetch("http://127.0.0.1:5500/grocery/item/all", {
+export const getAllLists = async (): Promise<GroceryList[]> => {
+    return await fetch("http://127.0.0.1:5500/grocery/list/all", {
         method: "GET",
         mode: "cors",
     })
@@ -17,8 +17,8 @@ export const getList = async (): Promise<GroceryItem[]> => {
         .catch((err) => console.error(err));
 }
 
-export const getItem = async (id: string): Promise<GroceryItem> => {
-    return await fetch(`http://127.0.0.1:5500/grocery/item/${id}`, {
+export const getList = async (id: string): Promise<GroceryList> => {
+    return await fetch(`http://127.0.0.1:5500/grocery/list/${id}`, {
         method: "GET",
         mode: "cors",
     })
@@ -32,7 +32,7 @@ export const getItem = async (id: string): Promise<GroceryItem> => {
 
             if (!datas.data) {
                 throw new Error(
-                    "Aucun item n'a été retourné."
+                    "Aucun list n'a été retourné."
                 );
             }
 
@@ -42,14 +42,14 @@ export const getItem = async (id: string): Promise<GroceryItem> => {
         .catch((err) => console.error(err));
 }
 
-export const createItem = async (item: PartialGroceryItem): Promise<GroceryItem> => {
-    return await fetch("http://127.0.0.1:5500/grocery/item", {
+export const createList = async (list: PartialGroceryList): Promise<GroceryList> => {
+    return await fetch("http://127.0.0.1:5500/grocery/list", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         mode: "cors",
-        body: JSON.stringify(item)
+        body: JSON.stringify(list)
     })
         .then(response => response.json())
         .then(datas => {
@@ -62,14 +62,14 @@ export const createItem = async (item: PartialGroceryItem): Promise<GroceryItem>
         .catch(err => console.error(err));
 }
 
-export const updateItem = async (item: GroceryItem): Promise<GroceryItem> => {
-    return await fetch(`http://127.0.0.1:5500/grocery/item/${item.id}`, {
+export const updateList = async (list: GroceryList): Promise<GroceryList> => {
+    return await fetch(`http://127.0.0.1:5500/grocery/list/${list.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         mode: "cors",
-        body: JSON.stringify(item)
+        body: JSON.stringify(list)
     })
         .then(response => response.json())
         .then(datas => {
@@ -82,8 +82,8 @@ export const updateItem = async (item: GroceryItem): Promise<GroceryItem> => {
         .catch(err => console.error(err));
 }
 
-export const deleteItem = async (id: number): Promise<void> => {
-    return await fetch(`http://127.0.0.1:5500/grocery/item/${id}`, {
+export const deleteList = async (id: number): Promise<void> => {
+    return await fetch(`http://127.0.0.1:5500/grocery/list/${id}`, {
         method: "DELETE",
         mode: "cors",
     })

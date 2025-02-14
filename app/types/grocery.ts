@@ -10,3 +10,14 @@ export type PartialGroceryItem = {
     description?: string;
     checked: boolean;
 }
+
+export type GroceryList = {
+    id: number;
+    name: string;
+    color: string;
+}
+
+export type PartialGroceryList = {
+    name: string;
+    color: string;
+}
