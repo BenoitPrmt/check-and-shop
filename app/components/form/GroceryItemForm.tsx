@@ -6,7 +6,7 @@ import {Label} from "~/components/ui/label";
 import {Input} from "~/components/ui/input";
 import {ArrowLeftIcon, PlusIcon} from "lucide-react";
 import {Link, useNavigate} from "react-router";
-import {createItem, updateItem} from "~/api/grocery";
+import {useGrocery} from "~/hooks/useGrocery";
 
 type Props = {
     item?: GroceryItem;
@@ -14,6 +14,7 @@ type Props = {
 
 const GroceryItemForm = ({ item }: Props) => {
     const navigate = useNavigate();
+    const { addGroceryItem, updateGroceryItem } = useGrocery();
 
     const [itemForm, setItemForm] = React.useState<PartialGroceryItem>({
         name: item?.name || "",
@@ -25,14 +26,14 @@ const GroceryItemForm = ({ item }: Props) => {
         e.preventDefault();
 
         if (item) {
-            updateItem({
+            updateGroceryItem({
                 id: item.id,
                 name: itemForm.name,
                 description: itemForm.description,
                 checked: itemForm.checked
             });
         } else {
-            createItem({
+            addGroceryItem({
                 name: itemForm.name,
                 description: itemForm.description,
                 checked: false

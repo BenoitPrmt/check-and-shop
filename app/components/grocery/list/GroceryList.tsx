@@ -1,31 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import GroceryListItem from "~/components/grocery/list/item/GroceryListItem";
-import type {GroceryItem} from "~/types/grocery";
-import {getList} from "~/api/grocery";
+import {useGrocery} from "~/hooks/useGrocery";
 
 const GroceryList = () => {
-    const [groceryItems, setGroceryItems] = useState<GroceryItem[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        if (groceryItems.length <= 0) {
-            getList().then((items) => {
-                setGroceryItems(items);
-                setLoading(false);
-            });
-        }
-    }, [groceryItems]);
-
-    const handleDelete = (id: number) => {
-        setGroceryItems((items) => items.filter((item) => item.id !== id));
-    }
+    const { groceryList } = useGrocery();
 
     return (
         <div>
-            {loading && <p>Chargement des données...</p>}
             <ul>
-                {groceryItems.map(item => (
-                    <GroceryListItem item={item} onDelete={() => handleDelete(item.id)} />
+                {groceryList.map((item, index) => (
+                    <GroceryListItem item={item} key={index} />
                 ))}
             </ul>
         </div>
