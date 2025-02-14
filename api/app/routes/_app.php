@@ -4,10 +4,19 @@ app()->get('/', function () {
     response()->json(['message' => 'Congrats!! You\'re on Leaf MVC']);
 });
 
-app()->group('/grocery', function () {
-    app()->get('/items', 'ItemsController@getList');
-    app()->get('/item/{id}', 'ItemsController@getById');
-    app()->post('/item', 'ItemsController@add');
-    app()->put('/item/{id}', 'ItemsController@update');
-    app()->delete('/item/{id}', 'ItemsController@deleteById');
+app()->group('/grocery/item', function () {
+    app()->get('/all', 'ItemsController@getList');
+    app()->get('/{id}', 'ItemsController@getById');
+    app()->post('/', 'ItemsController@add');
+    app()->put('/{id}', 'ItemsController@update');
+    app()->delete('/{id}', 'ItemsController@deleteById');
 });
+
+app()->group('/grocery/list', function () {
+    app()->get('/all', 'GroceryListsController@getList');
+    app()->get('/{id}', 'GroceryListsController@getById');
+    app()->post('/', 'GroceryListsController@add');
+    app()->put('/{id}', 'GroceryListsController@update');
+    app()->delete('/{id}', 'GroceryListsController@deleteById');
+});
+
