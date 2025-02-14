@@ -13,6 +13,6 @@ class GroceryList extends Model
 
     public function items(): HasMany
     {
-        return $this->hasMany(Item::class, 'list_id');
+        return $this->hasMany(Item::class, 'listId');
     }
 }

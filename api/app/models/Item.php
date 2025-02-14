@@ -11,7 +11,7 @@ class Item extends Model
         'list' => [
             'type' => 'belongsTo',
             'model' => 'GroceryList',
-            'foreign_key' => 'list_id'
+            'foreign_key' => 'listId'
         ]
     ];
 
@@ -19,6 +19,6 @@ class Item extends Model
 
     public function list()
     {
-        return $this->belongsTo('GroceryList', 'list_id');
+        return $this->belongsTo('GroceryList', 'listId');
     }
 }

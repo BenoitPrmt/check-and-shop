@@ -17,7 +17,7 @@ const GroceryListItem = ({ item }: Props) => {
             <div className="flex flex-row gap-2 items-center">
                 {item.checked ? (
                     <CircleCheckIcon
-                        className="w-6 h-6 text-green-500 cursor-pointer"
+                        className="w-6 h-6 text-gray-500 cursor-pointer"
                         onClick={() => toggleGroceryItem(item)}
                     />
                 ) : (

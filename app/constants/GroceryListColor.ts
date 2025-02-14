@@ -1,4 +1,6 @@
-export const COLORS: {[index: string]:any} = {
+import type {GroceryListColor} from "~/types/grocery";
+
+export const COLORS: {[index: string]: GroceryListColor} = {
     lila: {
         text: 'text-[#f095f0]',
         bg: 'bg-[#f095f0] text-white',

@@ -13,9 +13,9 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
 
     useEffect(() => {
         getList().then((groceryItems) => {
-            setGroceryList(groceryItems.map((item: any) => ({...item, listId: item.list_id})));
+            setGroceryList(groceryItems);
             getAllLists().then((lists) => {
-                const defaultListItems = groceryItems.filter((item: any) => item.list_id === null);
+                const defaultListItems = groceryItems.filter((item) => item.listId === null);
                 setGroceryLists([{ id: null, name: "Liste par défaut", color: "coal", items: defaultListItems }, ...lists]);
             });
         });
@@ -30,6 +30,7 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
     const deleteGroceryItem = (id: number) => {
         deleteItem(id).then(() => {
             setGroceryList((items) => items.filter((item) => item.id !== id));
+            setGroceryLists((lists) => lists.map((list) => ({...list, items: list.items?.filter((item) => item.id !== id)})));
         });
     }
 

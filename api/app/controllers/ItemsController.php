@@ -13,7 +13,7 @@ class ItemsController extends Controller
         $item->name = $data['name'];
         $item->description = $data['description'];
         $item->checked = $data['checked'];
-        $item->list_id = $data['listId'];
+        $item->listId = $data['listId'];
 
         $item->save();
 
@@ -64,7 +64,7 @@ class ItemsController extends Controller
         $item->name = $data['name'];
         $item->description = $data['description'];
         $item->checked = $data['checked'];
-        $item->list_id = $data['listId'];
+        $item->listId = $data['listId'];
 
         $item->save();
 

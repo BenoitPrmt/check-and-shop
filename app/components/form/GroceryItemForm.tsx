@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
 import {Button} from "~/components/ui/button";
 import type {GroceryItem, PartialGroceryItem} from "~/types/grocery";
@@ -22,7 +22,11 @@ const GroceryItemForm = ({item}: Props) => {
     const {addGroceryItem, updateGroceryItem, groceryLists} = useGrocery();
 
     const [open, setOpen] = useState<boolean>(false);
-    const [value, setValue] = useState<string>("");
+    const [value, setValue] = useState<string>(groceryLists.find((list) => list.id === item?.listId)?.name || "Liste par défaut");
+
+    useEffect(() => {
+        setValue(groceryLists.find((list) => list.id === item?.listId)?.name || "Liste par défaut");
+    }, [groceryLists]);
 
     const [itemForm, setItemForm] = React.useState<PartialGroceryItem>({
         name: item?.name || "",

@@ -8,6 +8,7 @@ import {ArrowLeftIcon, PlusIcon} from "lucide-react";
 import {Link, useNavigate} from "react-router";
 import {useGrocery} from "~/hooks/useGrocery";
 import {ToggleGroup, ToggleGroupItem} from "~/components/ui/toggle-group";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "~/components/ui/tooltip";
 
 type Props = {
     list?: GroceryList;
@@ -58,7 +59,7 @@ const GroceryListForm = ({ list }: Props) => {
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
-                        <div className="flex flex-col gap-3 lists-center">
+                        <div className="flex flex-col gap-3 items-center">
                             <div className="grid w-3/4 max-w-sm lists-center gap-1.5">
                                 <Label htmlFor="name">Nom de la liste</Label>
                                 <Input
@@ -74,31 +75,69 @@ const GroceryListForm = ({ list }: Props) => {
                             </div>
 
                             <Label htmlFor="name">Couleur de la liste</Label>
-                            <ToggleGroup
-                                type="single"
-                                size="lg"
-                                value={listForm.color}
-                                onValueChange={(color) => setListForm((listForm) => ({
-                                    ...listForm,
-                                    color
-                                }))}
-                            >
-                                <ToggleGroupItem value="lila" aria-label="Select lila color">
-                                    <div className="h-8 w-8 bg-[#f095f0] rounded-full" />
-                                </ToggleGroupItem>
-                                <ToggleGroupItem value="sun" aria-label="Select yellow color">
-                                    <div className="h-8 w-8 bg-[#ffa902] rounded-full" />
-                                </ToggleGroupItem>
-                                <ToggleGroupItem value="ocean" aria-label="Select blue color">
-                                    <div className="h-8 w-8 bg-[#007efe] rounded-full" />
-                                </ToggleGroupItem>
-                                <ToggleGroupItem value="tomato" aria-label="Select tomato color">
-                                    <div className="h-8 w-8 bg-[#f33d38] rounded-full" />
-                                </ToggleGroupItem>
-                                <ToggleGroupItem value="leaf" aria-label="Select green color">
-                                    <div className="h-8 w-8 bg-[#00d886] rounded-full" />
-                                </ToggleGroupItem>
-                            </ToggleGroup>
+
+                            <TooltipProvider>
+                                <ToggleGroup
+                                    type="single"
+                                    size="lg"
+                                    value={listForm.color}
+                                    onValueChange={(color) => setListForm((listForm) => ({
+                                        ...listForm,
+                                        color
+                                    }))}
+                                >
+                                    <ToggleGroupItem value="lila" aria-label="Select lila color" className="rounded-lg">
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <div className="h-8 w-8 bg-[#f095f0] rounded-full" />
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <p>Lila</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </ToggleGroupItem>
+                                    <ToggleGroupItem value="sun" aria-label="Select yellow color" className="rounded-lg">
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <div className="h-8 w-8 bg-[#ffa902] rounded-full" />
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <p>Sun</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </ToggleGroupItem>
+                                    <ToggleGroupItem value="ocean" aria-label="Select blue color" className="rounded-lg">
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <div className="h-8 w-8 bg-[#007efe] rounded-full" />
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <p>Ocean</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </ToggleGroupItem>
+                                    <ToggleGroupItem value="tomato" aria-label="Select tomato color" className="rounded-lg">
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <div className="h-8 w-8 bg-[#f33d38] rounded-full" />
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <p>Tomato</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </ToggleGroupItem>
+                                    <ToggleGroupItem value="leaf" aria-label="Select green color" className="rounded-lg">
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <div className="h-8 w-8 bg-[#00d886] rounded-full" />
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <p>Leaf</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </ToggleGroupItem>
+                                </ToggleGroup>
+                            </TooltipProvider>
 
                             <Button type={"submit"} className="w-3/4 max-w-sm cursor-pointer">
                                 <PlusIcon /> {list ? "Modifier" : "Ajouter"}
