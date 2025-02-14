@@ -12,11 +12,12 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
     ]);
 
     useEffect(() => {
-        getList().then((items) => {
-            setGroceryList(items);
-        });
-        getAllLists().then((lists) => {
-            setGroceryLists((items) => [...items, ...lists]);
+        getList().then((groceryItems) => {
+            setGroceryList(groceryItems.map((item: any) => ({...item, listId: item.list_id})));
+            getAllLists().then((lists) => {
+                const defaultListItems = groceryItems.filter((item: any) => item.list_id === null);
+                setGroceryLists([{ id: null, name: "Liste par défaut", color: "#000", items: defaultListItems }, ...lists]);
+            });
         });
     }, []);
 

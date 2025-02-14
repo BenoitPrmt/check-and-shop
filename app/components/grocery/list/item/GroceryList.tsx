@@ -2,16 +2,20 @@ import React from 'react';
 import GroceryListItem from "~/components/grocery/list/item/GroceryListItem";
 import {useGrocery} from "~/hooks/useGrocery";
 
-const GroceryList = () => {
+type Props = {
+    listId: number | null;
+}
+
+const GroceryList = ({ listId }: Props) => {
     const { groceryList } = useGrocery();
 
     return (
         <div>
             <ul>
-                {groceryList.length === 0 ? (
+                {groceryList.filter((item) => item.listId === listId).length === 0 ? (
                     <p className="text-gray-400">Il n'y a rien dans cette liste...</p>
                 ) : (
-                    groceryList.map((item, index) => (
+                    groceryList.filter((item) => item.listId === listId).map((item, index) => (
                         <GroceryListItem item={item} key={index} />
                     ))
                 )}
