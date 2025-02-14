@@ -18,5 +18,9 @@ export const COLORS: {[index: string]:any} = {
     leaf: {
         text: 'text-[#00d886]',
         bg: 'bg-[#00d886] text-white',
+    },
+    coal: {
+        text: 'text-[#333]',
+        bg: 'bg-[#333] text-white',
     }
 }

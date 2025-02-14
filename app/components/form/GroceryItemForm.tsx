@@ -146,6 +146,7 @@ const GroceryItemForm = ({item}: Props) => {
                                                         <CommandItem
                                                             key={list.name}
                                                             value={list.name}
+                                                            defaultChecked={value === list.name}
                                                             onSelect={(currentValue) => {
                                                                 setValue(currentValue === value ? "" : currentValue)
                                                                 setOpen(false)

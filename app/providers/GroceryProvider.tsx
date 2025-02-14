@@ -8,7 +8,7 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
 
     const [groceryList, setGroceryList] = useState<GroceryItem[]>([]);
     const [groceryLists, setGroceryLists] = useState<GroceryList[]>([
-        { id: null, name: "Liste par défaut", color: "#000", items: [] },
+        { id: null, name: "Liste par défaut", color: "coal", items: [] },
     ]);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
             setGroceryList(groceryItems.map((item: any) => ({...item, listId: item.list_id})));
             getAllLists().then((lists) => {
                 const defaultListItems = groceryItems.filter((item: any) => item.list_id === null);
-                setGroceryLists([{ id: null, name: "Liste par défaut", color: "#000", items: defaultListItems }, ...lists]);
+                setGroceryLists([{ id: null, name: "Liste par défaut", color: "coal", items: defaultListItems }, ...lists]);
             });
         });
     }, []);
