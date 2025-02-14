@@ -1,6 +1,9 @@
 import type {Route} from "./+types/home";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
 import {Button} from "~/components/ui/button";
+import {Link} from "react-router";
+import {PlusIcon} from "lucide-react";
+import GroceryList from "~/components/grocery/list/GroceryList";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -17,21 +20,17 @@ export default function Home() {
                     <CardTitle>
                         <div className="flex justify-between items-center">
                             <h2>Liste de courses</h2>
-                            <Button>
-                                Ajouter un item
-                            </Button>
+                            <Link to={"/grocery/item/add"}>
+                                <Button className="cursor-pointer">
+                                    <PlusIcon /> Ajouter un item
+                                </Button>
+                            </Link>
                         </div>
                     </CardTitle>
                     <CardDescription>Card Description</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <ul>
-                        <li>Abc</li>
-                        <li>Abc</li>
-                        <li>Abc</li>
-                        <li>Abc</li>
-                        <li>Abc</li>
-                    </ul>
+                    <GroceryList />
                 </CardContent>
             </Card>
 
