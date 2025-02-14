@@ -6,7 +6,7 @@ import type {GroceryItem} from "~/types/grocery";
 
 export function meta({}: Route.MetaArgs) {
     return [
-        {title: "Ajouter - Check&Shop"},
+        {title: "Modifier - Check&Shop"},
         {name: "description", content: "Bienvenue sur Check&Shop"},
     ];
 }

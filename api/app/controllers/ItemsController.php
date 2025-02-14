@@ -1,0 +1,86 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Models\Item;
+
+class ItemsController extends Controller
+{
+    public function add() {
+        $data = request()->get(['name', 'description', 'checked']);
+
+        $item = new Item;
+        $item->name = $data['name'];
+        $item->description = $data['description'];
+        $item->checked = $data['checked'];
+
+        $item->save();
+
+        response()->json([
+            'message' => 'Created',
+            'data' => $item,
+            'status' => 201
+        ], 201);
+    }
+
+    public function getList() {
+        $items = Item::all();
+
+        response()->json($items);
+    }
+
+    public function getById($id) {
+        $item = Item::find($id);
+
+        if (!$item) {
+            response()->json([
+                'message' => 'Not Found',
+                'status' => 404
+            ], 404);
+        }
+
+        response()->json($item);
+    }
+
+    public function update($id) {
+        $data = request()->get(['name', 'description', 'checked']);
+
+        $item = Item::find($id);
+
+        if (!$item) {
+            response()->json([
+                'message' => 'Not Found',
+                'status' => 404
+            ], 404);
+        }
+
+        $item->name = $data['name'];
+        $item->description = $data['description'];
+        $item->checked = $data['checked'];
+
+        $item->save();
+
+        response()->json([
+            'message' => 'Updated',
+            'status' => 200
+        ]);
+    }
+
+    public function deleteById($id) {
+        $item = Item::find($id);
+
+        if (!$item) {
+            response()->json([
+                'message' => 'Not Found',
+                'status' => 404
+            ], 404);
+        }
+
+        $item->delete();
+
+        response()->json([
+            'message' => 'Deleted',
+            'status' => 200
+        ]);
+    }
+}
