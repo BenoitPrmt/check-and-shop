@@ -3,8 +3,8 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/compo
 import {Button} from "~/components/ui/button";
 import {Link} from "react-router";
 import {PlusIcon} from "lucide-react";
-import GroceryList from "~/components/grocery/list/item/GroceryList";
-import GroceryLists from "~/components/grocery/list/GroceryLists";
+import ListAccordion from "~/components/grocery/list/ListAccordion";
+import {useGrocery} from "~/hooks/useGrocery";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -14,6 +14,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+    const { groceryLists } = useGrocery();
+
     return (
         <div className="container mx-auto pt-28 flex flex-col gap-5 items-center justify-center w-2/3">
             <Card className={"w-full"}>
@@ -28,10 +30,10 @@ export default function Home() {
                             </Link>
                         </div>
                     </CardTitle>
+                    <CardDescription>
+                        {groceryLists.length} liste{(groceryLists.length || 0) > 1 ? 's' : ''} créée{(groceryLists.length || 0) > 1 ? 's' : ''}
+                    </CardDescription>
                 </CardHeader>
-                <CardContent>
-                    <GroceryLists />
-                </CardContent>
             </Card>
 
             <Card className={"w-full"}>
@@ -46,12 +48,9 @@ export default function Home() {
                             </Link>
                         </div>
                     </CardTitle>
-                    <CardDescription>
-                        Liste par défaut
-                    </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <GroceryList />
+                    <ListAccordion />
                 </CardContent>
             </Card>
 

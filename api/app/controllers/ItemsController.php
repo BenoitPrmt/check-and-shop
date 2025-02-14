@@ -7,12 +7,13 @@ use App\Models\Item;
 class ItemsController extends Controller
 {
     public function add() {
-        $data = request()->get(['name', 'description', 'checked']);
+        $data = request()->get(['name', 'description', 'checked', 'listId']);
 
         $item = new Item;
         $item->name = $data['name'];
         $item->description = $data['description'];
         $item->checked = $data['checked'];
+        $item->list_id = $data['listId'];
 
         $item->save();
 
@@ -63,6 +64,7 @@ class ItemsController extends Controller
         $item->name = $data['name'];
         $item->description = $data['description'];
         $item->checked = $data['checked'];
+        $item->list_id = $data['listId'];
 
         $item->save();
 

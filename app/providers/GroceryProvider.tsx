@@ -7,14 +7,16 @@ import {createList, deleteList, getAllLists, updateList} from "~/api/grocery/lis
 export const GroceryProvider = ({children}: { children: ReactNode }) => {
 
     const [groceryList, setGroceryList] = useState<GroceryItem[]>([]);
-    const [groceryLists, setGroceryLists] = useState<GroceryList[]>([]);
+    const [groceryLists, setGroceryLists] = useState<GroceryList[]>([
+        { id: null, name: "Liste par défaut", color: "#000", items: [] },
+    ]);
 
     useEffect(() => {
         getList().then((items) => {
             setGroceryList(items);
         });
         getAllLists().then((lists) => {
-            setGroceryLists(lists);
+            setGroceryLists((items) => [...items, ...lists]);
         });
     }, []);
 

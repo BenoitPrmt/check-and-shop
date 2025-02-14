@@ -3,18 +3,21 @@ export type GroceryItem = {
     name: string;
     description?: string;
     checked: boolean;
+    listId: number | null;
 }
 
 export type PartialGroceryItem = {
     name: string;
     description?: string;
     checked: boolean;
+    listId: number | null;
 }
 
 export type GroceryList = {
-    id: number;
+    id: number | null;
     name: string;
     color: string;
+    items?: GroceryItem[];
 }
 
 export type PartialGroceryList = {
