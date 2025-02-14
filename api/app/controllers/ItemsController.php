@@ -26,7 +26,10 @@ class ItemsController extends Controller
     public function getList() {
         $items = Item::all();
 
-        response()->json($items);
+        response()->json([
+            'data' => $items,
+            'status' => 200
+        ]);
     }
 
     public function getById($id) {
@@ -39,7 +42,10 @@ class ItemsController extends Controller
             ], 404);
         }
 
-        response()->json($item);
+        response()->json([
+            'data' => $item,
+            'status' => 200
+        ]);
     }
 
     public function update($id) {
@@ -62,6 +68,7 @@ class ItemsController extends Controller
 
         response()->json([
             'message' => 'Updated',
+            'data' => $item,
             'status' => 200
         ]);
     }

@@ -1,20 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import GroceryListItem from "~/components/grocery/list/item/GroceryListItem";
 import type {GroceryItem} from "~/types/grocery";
+import {getList} from "~/api/grocery";
 
 const GroceryList = () => {
+    const [groceryItems, setGroceryItems] = useState<GroceryItem[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
-    const items: GroceryItem[] = [
-        {id: 1, name: "Pomme", description: "Une pomme", checked: false},
-        {id: 2, name: "Poire", description: "Une poire", checked: false},
-        {id: 3, name: "Banane", description: "Une banane", checked: false},
-        {id: 4, name: "Orange", description: "Une orange", checked: false},
-    ]
+    useEffect(() => {
+        if (groceryItems.length <= 0) {
+            getList().then((items) => {
+                setGroceryItems(items);
+                setLoading(false);
+            });
+        }
+    }, [groceryItems]);
 
     return (
         <div>
+            {loading && <p>Chargement des données...</p>}
             <ul>
-                {items.map(item => (
+                {groceryItems.map(item => (
                     <GroceryListItem item={item} />
                 ))}
             </ul>
