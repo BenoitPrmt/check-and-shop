@@ -1,6 +1,6 @@
 import type {GroceryItem, PartialGroceryItem} from "~/types/grocery";
 
-export const getList = async (): Promise<GroceryItem[]> => {
+export const getItemList = async (): Promise<GroceryItem[]> => {
     return await fetch("http://127.0.0.1:5500/grocery/item/all", {
         method: "GET",
         mode: "cors",

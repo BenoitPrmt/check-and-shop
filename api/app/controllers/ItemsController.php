@@ -50,7 +50,7 @@ class ItemsController extends Controller
     }
 
     public function update($id) {
-        $data = request()->get(['name', 'description', 'checked']);
+        $data = request()->get(['name', 'description', 'checked', 'listId']);
 
         $item = Item::find($id);
 

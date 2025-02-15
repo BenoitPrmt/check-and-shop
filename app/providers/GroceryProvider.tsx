@@ -1,7 +1,7 @@
 import {type ReactNode, useEffect, useState} from "react";
 import {GroceryContext} from "~/context/GroceryContext";
 import type {GroceryItem, GroceryList, PartialGroceryItem, PartialGroceryList} from "~/types/grocery";
-import {createItem, deleteItem, getList, updateItem} from "~/api/grocery/item";
+import {createItem, deleteItem, getItemList, updateItem} from "~/api/grocery/item";
 import {createList, deleteList, getAllLists, updateList} from "~/api/grocery/list";
 
 export const GroceryProvider = ({children}: { children: ReactNode }) => {
@@ -12,7 +12,7 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
     ]);
 
     useEffect(() => {
-        getList().then((groceryItems) => {
+        getItemList().then((groceryItems) => {
             setGroceryList(groceryItems);
             getAllLists().then((lists) => {
                 const defaultListItems = groceryItems.filter((item) => item.listId === null);

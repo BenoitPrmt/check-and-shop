@@ -17,6 +17,10 @@ class Item extends Model
 
     protected $fillable = ['name', 'description', 'checked'];
 
+    protected $casts = [
+        'checked' => 'boolean'
+    ];
+
     public function list()
     {
         return $this->belongsTo('GroceryList', 'listId');

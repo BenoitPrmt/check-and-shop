@@ -4,14 +4,14 @@ import {Button} from "~/components/ui/button";
 import type {GroceryItem, PartialGroceryItem} from "~/types/grocery";
 import {Label} from "~/components/ui/label";
 import {Input} from "~/components/ui/input";
-import {ArrowLeftIcon, Check, ChevronsUpDown, PlusIcon} from "lucide-react";
+import {ArrowLeftIcon, Check, ChevronsUpDown, PlusIcon, SaveIcon} from "lucide-react";
 import {Link, useNavigate} from "react-router";
 import {useGrocery} from "~/hooks/useGrocery";
-import {Checkbox} from "~/components/ui/checkbox";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "~/components/ui/command";
 import {cn} from "~/lib/utils";
 import {COLORS} from "~/constants/GroceryListColor";
+import {Switch} from "~/components/ui/switch";
 
 type Props = {
     item?: GroceryItem;
@@ -34,6 +34,8 @@ const GroceryItemForm = ({item}: Props) => {
         checked: item?.checked || false,
         listId: item?.listId || null
     });
+
+    console.log(item);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -104,13 +106,19 @@ const GroceryItemForm = ({item}: Props) => {
 
                             {item && (
                                 <div className="grid w-3/4 max-w-sm items-center gap-1.5">
-                                    <Checkbox
-                                        checked={itemForm.checked}
-                                        onChange={(e) => setItemForm((itemForm) => ({
-                                            ...itemForm,
-                                            checked: !itemForm.checked
-                                        }))}
-                                    />
+                                    <div className="flex items-center space-x-2">
+                                        <Switch
+                                            id="checked"
+                                            checked={itemForm.checked}
+                                            onCheckedChange={(state) => setItemForm((itemForm) => ({
+                                                ...itemForm,
+                                                checked: state
+                                            }))}
+                                        />
+                                        <Label htmlFor="checked">
+                                            {itemForm.checked ? "Produit acheté" : "Produit à acheter"}
+                                        </Label>
+                                    </div>
                                 </div>
                             )}
 
@@ -174,7 +182,7 @@ const GroceryItemForm = ({item}: Props) => {
                             </div>
 
                             <Button type={"submit"} className="w-3/4 max-w-sm cursor-pointer">
-                                <PlusIcon/> {item ? "Modifier" : "Ajouter"}
+                                {item ? <SaveIcon /> : <PlusIcon/>} {item ? "Modifier" : "Ajouter"}
                             </Button>
                             <Link to={"/"} className="w-3/4 max-w-sm">
                                 <Button type={"submit"} variant={"outline"} className="w-full cursor-pointer">
