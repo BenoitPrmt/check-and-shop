@@ -1,7 +1,7 @@
 <?php
 
 app()->get('/', function () {
-    response()->json(['message' => 'Congrats!! You\'re on Leaf MVC']);
+    response()->json(['message' => 'Bienvenue sur l\'API de Check&Shop']);
 });
 
 app()->group('/grocery/item', function () {

@@ -5,7 +5,7 @@ import type {GroceryItem, PartialGroceryItem} from "~/types/grocery";
 import {Label} from "~/components/ui/label";
 import {Input} from "~/components/ui/input";
 import {ArrowLeftIcon, Check, ChevronsUpDown, PlusIcon, SaveIcon} from "lucide-react";
-import {Link, useNavigate} from "react-router";
+import {Link, useNavigate, useSearchParams} from "react-router";
 import {useGrocery} from "~/hooks/useGrocery";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "~/components/ui/command";
@@ -21,11 +21,21 @@ const GroceryItemForm = ({item}: Props) => {
     const navigate = useNavigate();
     const {addGroceryItem, updateGroceryItem, groceryLists} = useGrocery();
 
+    const [searchParams] = useSearchParams();
+
+    const defaultSelectedListByParam = searchParams.get("list");
+    const defaultSelectedList = item ?
+        groceryLists.find((list) => list.id === item.listId)?.name :
+        groceryLists.find((list) => list.id === parseInt(defaultSelectedListByParam || ""))?.name;
+
     const [open, setOpen] = useState<boolean>(false);
-    const [value, setValue] = useState<string>(groceryLists.find((list) => list.id === item?.listId)?.name || "Liste par défaut");
+    const [value, setValue] = useState<string>(defaultSelectedList || "Liste par défaut");
 
     useEffect(() => {
-        setValue(groceryLists.find((list) => list.id === item?.listId)?.name || "Liste par défaut");
+        const defaultSelectedList = item ?
+            groceryLists.find((list) => list.id === item.listId)?.name :
+            groceryLists.find((list) => list.id === parseInt(defaultSelectedListByParam || ""))?.name;
+        setValue(defaultSelectedList || "Liste par défaut");
     }, [groceryLists]);
 
     const [itemForm, setItemForm] = React.useState<PartialGroceryItem>({
@@ -34,8 +44,6 @@ const GroceryItemForm = ({item}: Props) => {
         checked: item?.checked || false,
         listId: item?.listId || null
     });
-
-    console.log(item);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
