@@ -1,10 +1,16 @@
 # Check & Shop 🛒
 
 ## 📋 Contexte
-Check & Shop est une application web dévelo^
+**Check & Shop** est une application web développée en React (TypeScript) et TailwindCSS pour le frontend, et en PHP (Leaf) pour le backend.
+Elle permet de gérer une liste de courses, en ajoutant des produits à acheter, en les cochant lorsqu'ils sont dans le panier, et en les supprimant une fois achetés.
 
 ## ✨ Fonctionnalités
--
+- Ajouter un produit à la liste
+- Cocher un produit
+- Supprimer un produit de la liste
+- Créer des listes personnalisées _(par exemple, une liste pour chaque magasin)_
+- Personnaliser la couleur de chaque liste
+- Modifier et supprimer une liste
 
 ## ⚡️️ Prérequis
 Vous devez avoir NodeJS en version 20 et PHP 8.2 installés sur votre machine.
@@ -18,20 +24,31 @@ git clone https://github.com/BenoitPrmt/check-and-shop.git
 cd check-and-shop
 ```
 
+### ⚡️️ Frontend
 Installez les dépendances avec PNPM :
 ```bash
 pnpm install
 ```
 
-Installez les dépendances de l'API :
+### ⚡️️ Backend
+Définir le fichier `.env` pour l'API :
 ```bash
 cd api
+cp .env.example .env
+```
+Ensuite, vous devez modifier les informations de connexion à la base de données dans le fichier `.env` pour correspondre à votre configuration.
+
+Le schéma de la base de données est disponible dans le fichier `database.sql` (dans le dossier `api`).
+Importez ce fichier dans PhpMyAdmin ou un autre outil de gestion de base de données pour créer la base de données avec les tables nécessaires.
+
+Installez les dépendances de l'API :
+```bash
 composer install
 ```
 
-Lancez le projet :
+### ⚡️️ Lancement du projet
 
--> Automatiquement :
+**→ Automatiquement :**
 ```bash
 # Windows
 start.bat
@@ -39,14 +56,11 @@ start.bat
 # MacOS et Linux
 sh scripts/launch.sh
 ```
-
 Pour couper le serveur, faites `Ctrl + C` dans le terminal.
 
--> Manuellement :
+**→ Manuellement :**
 ```bash
 pnpm start
 ```
 
-Ensuite, vous pouvez tester le projet sur votre téléphone en scannant le QR Code et en testant via l'application Expo Go.
-
-Développé par Benoit Parmentier - contact@benoitparmentier.fr
+Développé par Benoit Parmentier - `contact@benoitparmentier.fr`
