@@ -50,13 +50,13 @@ composer install
 
 **→ Automatiquement :**
 ```bash
-# Windows
-start.bat
+# Windows (PowerShell)
+scripts/start.bat
 
-# MacOS et Linux
-sh scripts/launch.sh
+# MacOS, Linux et Windows (avec Bash)
+sh scripts/start.sh
 ```
-Pour couper le serveur, faites `Ctrl + C` dans le terminal.
+En lancant avec bash, pour couper le serveur, faites `Ctrl + C` dans le terminal.
 
 **→ Manuellement :**
 ```bash
