@@ -60,7 +60,13 @@ En lancant avec bash, pour couper le serveur, faites `Ctrl + C` dans le terminal
 
 **→ Manuellement :**
 ```bash
-pnpm start
+pnpm run dev
+```
+
+Pour lancer l'API, ouvrez un nouveau terminal et exécutez la commande suivante :
+```bash
+cd api
+php -S 127.0.0.1:5500
 ```
 
 Développé par Benoit Parmentier - `contact@benoitparmentier.fr`

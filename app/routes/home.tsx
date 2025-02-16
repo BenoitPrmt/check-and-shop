@@ -48,7 +48,7 @@ export default function Home() {
                             <h2 className="font-bold text-2xl">Liste de courses</h2>
                             <Link to={"/grocery/item/add"}>
                                 <Button className="cursor-pointer">
-                                    <PlusIcon /> Ajouter un item
+                                    <PlusIcon /> Ajouter un produit
                                 </Button>
                             </Link>
                         </div>
