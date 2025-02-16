@@ -12,7 +12,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
     return (
-        <div className="container mx-auto pt-28 flex flex-col items-center justify-center w-2/3">
+        <div className="container mx-auto pt-28 flex flex-col items-center justify-center w-11/12 md:w-3/4 lg:w-1/2">
             <div className="w-full">
                 <GroceryItemForm />
             </div>

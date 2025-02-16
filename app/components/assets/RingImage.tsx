@@ -28,7 +28,7 @@ const RingImage: React.FC<StoryRingImageProps> = ({
 
     return (
         <div
-            className={`${sizes[size].wrapper} rounded-full p-[2px] bg-gradient-to-tr from-orange-600 to-yellow-500 ${className}`}
+            className={`${sizes[size].wrapper} rounded-full p-[3px] bg-gradient-to-tr from-[#f17587] via-[#f68058] to-[#fe901a] ${className}`}
         >
             <div className="h-full w-full rounded-full p-0.5 bg-white">
                 <img

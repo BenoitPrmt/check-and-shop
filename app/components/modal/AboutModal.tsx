@@ -23,7 +23,7 @@ const AboutModal = () => {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className={"text-2xl"}>
-                        À propos de <span className="font-bold bg-gradient-to-r from-orange-600 to-yellow-500 text-transparent bg-clip-text">Check & Shop</span>
+                        À propos de <span className="font-bold bg-gradient-to-r from-[#f17587] via-[#f68058] to-[#fe901a] text-transparent bg-clip-text">Check & Shop</span>
                     </DialogTitle>
                     <DialogDescription>
                         Check & Shop est une application web de gestion de listes de courses. Elle a été développée en <span className="font-bold text-[#3078c6]">Typescript</span> avec <span className="font-bold text-[#58c4dc]">React</span> et <span className="font-bold text-[#00bcff]">Tailwind CSS</span> et un back-end en <span className="font-bold text-[#4f5b93]">PHP</span> avec le framework <span className="font-bold text-[#3faf7c]">Leaf</span>.

@@ -4,7 +4,12 @@ import AboutModal from "~/components/modal/AboutModal";
 const Header = () => {
     return (
         <nav className="bg-gray-800 p-4 text-white flex justify-between items-center w-full">
-            <h1 className="font-bold text-2xl bg-gradient-to-r from-orange-600 to-yellow-500 text-transparent bg-clip-text">Check & Shop</h1>
+
+            <div className="flex items-center space-x-2">
+                <img src="/favicon.ico" alt="logo" className="w-8 h-8" />
+                <h1 className="font-bold text-2xl bg-gradient-to-r from-[#f17587] via-[#f68058] to-[#fe901a] text-transparent bg-clip-text">Check & Shop</h1>
+            </div>
+
             <AboutModal />
         </nav>
     );

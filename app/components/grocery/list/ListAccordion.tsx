@@ -8,7 +8,7 @@ const ListAccordion = () => {
     const { groceryLists } = useGrocery();
 
     return (
-        <Accordion type="single" collapsible className="w-full">
+        <Accordion type="single" collapsible className="w-full" defaultValue={`${groceryLists[0]?.id}`}>
             {groceryLists.map((list, index) => (
                 <AccordionItem key={index} value={`${list.id}`}>
                     <AccordionTrigger className="hover:no-underline cursor-pointer">

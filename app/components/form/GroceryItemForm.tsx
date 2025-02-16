@@ -12,6 +12,7 @@ import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandL
 import {cn} from "~/lib/utils";
 import {COLORS} from "~/constants/GroceryListColor";
 import {Switch} from "~/components/ui/switch";
+import {DEFAULT_GROCERY_LIST_NAME} from "~/constants/GroceryList";
 
 type Props = {
     item?: GroceryItem;
@@ -26,17 +27,19 @@ const GroceryItemForm = ({item}: Props) => {
     const defaultSelectedListByParam = searchParams.get("list");
     const defaultSelectedList = item ?
         groceryLists.find((list) => list.id === item.listId)?.name :
-        groceryLists.find((list) => list.id === parseInt(defaultSelectedListByParam || ""))?.name;
+        (defaultSelectedListByParam ? groceryLists.find((list) => list.id === parseInt(defaultSelectedListByParam))?.name : null);
 
     const [open, setOpen] = useState<boolean>(false);
-    const [value, setValue] = useState<string>(defaultSelectedList || "Liste par défaut");
+    const [value, setValue] = useState<string>(defaultSelectedList || DEFAULT_GROCERY_LIST_NAME);
 
     useEffect(() => {
         const defaultSelectedList = item ?
             groceryLists.find((list) => list.id === item.listId)?.name :
-            groceryLists.find((list) => list.id === parseInt(defaultSelectedListByParam || ""))?.name;
-        setValue(defaultSelectedList || "Liste par défaut");
+            (defaultSelectedListByParam ? groceryLists.find((list) => list.id === parseInt(defaultSelectedListByParam))?.name : null);
+        setValue(defaultSelectedList || DEFAULT_GROCERY_LIST_NAME);
     }, [groceryLists]);
+
+    console.log(item)
 
     const [itemForm, setItemForm] = React.useState<PartialGroceryItem>({
         name: item?.name || "",
@@ -57,6 +60,7 @@ const GroceryItemForm = ({item}: Props) => {
                 listId: groceryLists.find((list) => list.name === value)?.id || null
             });
         } else {
+            console.log(groceryLists.find((list) => list.name === value), groceryLists.find((list) => list.name === value)?.id)
             addGroceryItem({
                 name: itemForm.name,
                 description: itemForm.description,
@@ -79,7 +83,9 @@ const GroceryItemForm = ({item}: Props) => {
                             </h2>
                         </div>
                     </CardTitle>
-                    <CardDescription>Card Description</CardDescription>
+                    <CardDescription>
+                        Ajouter un élément à votre liste de courses !
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
@@ -90,6 +96,7 @@ const GroceryItemForm = ({item}: Props) => {
                                     type="text"
                                     id="name"
                                     name="name"
+                                    placeholder="Chips, tomates, lait..."
                                     value={itemForm.name}
                                     onChange={(e) => setItemForm((itemForm) => ({
                                         ...itemForm,
@@ -104,6 +111,7 @@ const GroceryItemForm = ({item}: Props) => {
                                     type="text"
                                     id="description"
                                     name="description"
+                                    placeholder="Marque, quantité, etc."
                                     value={itemForm.description}
                                     onChange={(e) => setItemForm((itemForm) => ({
                                         ...itemForm,
@@ -168,7 +176,7 @@ const GroceryItemForm = ({item}: Props) => {
                                                             value={list.name}
                                                             defaultChecked={value === list.name}
                                                             onSelect={(currentValue) => {
-                                                                setValue(currentValue === value ? "" : currentValue)
+                                                                setValue(currentValue === value ? DEFAULT_GROCERY_LIST_NAME : currentValue)
                                                                 setOpen(false)
                                                             }}
                                                         >
@@ -189,14 +197,17 @@ const GroceryItemForm = ({item}: Props) => {
                                 </Popover>
                             </div>
 
-                            <Button type={"submit"} className="w-3/4 max-w-sm cursor-pointer">
-                                {item ? <SaveIcon /> : <PlusIcon/>} {item ? "Modifier" : "Ajouter"}
-                            </Button>
-                            <Link to={"/"} className="w-3/4 max-w-sm">
-                                <Button type={"submit"} variant={"outline"} className="w-full cursor-pointer">
-                                    <ArrowLeftIcon/> Annuler
+                            <div className="grid grid-cols-6 w-3/4 max-w-sm items-center gap-1.5">
+                                <Link to={"/"} className="col-span-1">
+                                    <Button type={"submit"} variant={"outline"} className="w-full cursor-pointer">
+                                        <ArrowLeftIcon/>
+                                    </Button>
+                                </Link>
+                                <Button type={"submit"} className="col-span-5 cursor-pointer">
+                                    {item ? <SaveIcon /> : <PlusIcon/>} {item ? "Modifier" : "Ajouter"}
                                 </Button>
-                            </Link>
+                            </div>
+
                         </div>
                     </form>
                 </CardContent>

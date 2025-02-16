@@ -6,6 +6,7 @@ import {PlusIcon, SettingsIcon} from "lucide-react";
 import ListAccordion from "~/components/grocery/list/ListAccordion";
 import {useGrocery} from "~/hooks/useGrocery";
 import {DialogTrigger, DialogHeader, DialogContent, DialogTitle, DialogDescription, Dialog} from "~/components/ui/dialog";
+import ManageListsModal from "~/components/modal/ManageListsModal";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -18,28 +19,14 @@ export default function Home() {
     const { groceryLists } = useGrocery();
 
     return (
-        <div className="container mx-auto pt-28 flex flex-col gap-5 items-center justify-center w-2/3">
+        <div className="container mx-auto pt-28 flex flex-col gap-5 items-center justify-center w-11/12 md:w-3/4 lg:w-1/2">
             <Card className={"w-full"}>
                 <CardHeader>
                     <CardTitle>
-                        <div className="flex justify-between items-center">
+                        <div className="flex items-center flex-col gap-2 justify-center md:flex-row md:justify-between">
                             <h2 className="font-bold text-2xl">Listes personnalisées</h2>
                             <div className={"flex gap-2"}>
-                                <Dialog>
-                                    <DialogTrigger>
-                                        <Button className="cursor-pointer" variant={"outline"}>
-                                            <SettingsIcon />
-                                        </Button>
-                                    </DialogTrigger>
-                                    <DialogContent>
-                                        <DialogHeader>
-                                            <DialogTitle>Gérez vos listes</DialogTitle>
-                                            <DialogDescription>
-                                                Ici, vous pouvez créer, modifier et supprimer vos listes de courses.
-                                            </DialogDescription>
-                                        </DialogHeader>
-                                    </DialogContent>
-                                </Dialog>
+                                <ManageListsModal />
                                 <Link to={"/grocery/list/add"}>
                                     <Button className="cursor-pointer">
                                         <PlusIcon /> Créer une liste
@@ -57,7 +44,7 @@ export default function Home() {
             <Card className={"w-full"}>
                 <CardHeader>
                     <CardTitle>
-                        <div className="flex justify-between items-center">
+                        <div className="flex items-center flex-col gap-2 justify-center md:flex-row md:justify-between">
                             <h2 className="font-bold text-2xl">Liste de courses</h2>
                             <Link to={"/grocery/item/add"}>
                                 <Button className="cursor-pointer">

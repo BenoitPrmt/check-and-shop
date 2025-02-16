@@ -14,7 +14,7 @@ const GroceryList = ({ listId }: Props) => {
 
     return (
         <div>
-            <ul>
+            <ul className={"flex flex-col gap-2"}>
                 {groceryList.filter((item) => item.listId === listId).length === 0 ? (
                     <div className={"flex flex-col gap-2 items-center justify-center"}>
                         <p className="text-gray-400">Il n'y a rien dans cette liste...</p>

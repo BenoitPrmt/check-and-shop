@@ -66,6 +66,7 @@ const GroceryListForm = ({ list }: Props) => {
                                     type="text"
                                     id="name"
                                     name="name"
+                                    placeholder="Courses, bricolage..."
                                     value={listForm.name}
                                     onChange={(e) => setListForm((listForm) => ({
                                         ...listForm,
@@ -139,14 +140,17 @@ const GroceryListForm = ({ list }: Props) => {
                                 </ToggleGroup>
                             </TooltipProvider>
 
-                            <Button type={"submit"} className="w-3/4 max-w-sm cursor-pointer">
-                                <PlusIcon /> {list ? "Modifier" : "Ajouter"}
-                            </Button>
-                            <Link to={"/"} className="w-3/4 max-w-sm">
-                                <Button type={"submit"} variant={"outline"} className="w-full cursor-pointer">
-                                    <ArrowLeftIcon /> Annuler
+                            <div className="grid grid-cols-6 w-3/4 max-w-sm lists-center gap-1.5">
+                                <Link to={"/"} className="col-span-1">
+                                    <Button type={"submit"} variant={"outline"} className="w-full cursor-pointer">
+                                        <ArrowLeftIcon />
+                                    </Button>
+                                </Link>
+                                <Button type={"submit"} className="col-span-5 cursor-pointer">
+                                    <PlusIcon /> {list ? "Modifier" : "Ajouter"}
                                 </Button>
-                            </Link>
+                            </div>
+
                         </div>
                     </form>
                 </CardContent>

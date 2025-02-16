@@ -3,12 +3,13 @@ import {GroceryContext} from "~/context/GroceryContext";
 import type {GroceryItem, GroceryList, PartialGroceryItem, PartialGroceryList} from "~/types/grocery";
 import {createItem, deleteItem, getItemList, updateItem} from "~/api/grocery/item";
 import {createList, deleteList, getAllLists, updateList} from "~/api/grocery/list";
+import {DEFAULT_GROCERY_LIST, DEFAULT_GROCERY_LIST_NAME} from "~/constants/GroceryList";
 
 export const GroceryProvider = ({children}: { children: ReactNode }) => {
 
     const [groceryList, setGroceryList] = useState<GroceryItem[]>([]);
     const [groceryLists, setGroceryLists] = useState<GroceryList[]>([
-        { id: null, name: "Liste par défaut", color: "coal", items: [] },
+        DEFAULT_GROCERY_LIST,
     ]);
 
     useEffect(() => {
@@ -16,13 +17,19 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
             setGroceryList(groceryItems);
             getAllLists().then((lists) => {
                 const defaultListItems = groceryItems.filter((item) => item.listId === null);
-                setGroceryLists([{ id: null, name: "Liste par défaut", color: "coal", items: defaultListItems }, ...lists]);
+                setGroceryLists([{ id: null, name: DEFAULT_GROCERY_LIST_NAME, color: "coal", items: defaultListItems }, ...lists]);
             });
         });
     }, []);
 
+    useEffect(() => {
+        setGroceryLists((lists) => lists.map((list) => ({...list, items: groceryList.filter((item) => item.listId === list.id)})));
+    }, [groceryList]);
+
     const addGroceryItem = (item: PartialGroceryItem) => {
+        console.log("item", item);
         createItem(item).then((newItem) => {
+            console.log("newItem", newItem);
             setGroceryList((items) => [...items, newItem]);
         });
     }

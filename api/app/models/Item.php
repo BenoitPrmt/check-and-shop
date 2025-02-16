@@ -15,7 +15,7 @@ class Item extends Model
         ]
     ];
 
-    protected $fillable = ['name', 'description', 'checked'];
+    protected $fillable = ['name', 'description', 'checked', 'listId'];
 
     protected $casts = [
         'checked' => 'boolean'
