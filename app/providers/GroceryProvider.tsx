@@ -27,9 +27,7 @@ export const GroceryProvider = ({children}: { children: ReactNode }) => {
     }, [groceryList]);
 
     const addGroceryItem = (item: PartialGroceryItem) => {
-        console.log("item", item);
         createItem(item).then((newItem) => {
-            console.log("newItem", newItem);
             setGroceryList((items) => [...items, newItem]);
         });
     }

@@ -39,8 +39,6 @@ const GroceryItemForm = ({item}: Props) => {
         setValue(defaultSelectedList || DEFAULT_GROCERY_LIST_NAME);
     }, [groceryLists]);
 
-    console.log(item)
-
     const [itemForm, setItemForm] = React.useState<PartialGroceryItem>({
         name: item?.name || "",
         description: item?.description,
@@ -60,7 +58,6 @@ const GroceryItemForm = ({item}: Props) => {
                 listId: groceryLists.find((list) => list.name === value)?.id || null
             });
         } else {
-            console.log(groceryLists.find((list) => list.name === value), groceryLists.find((list) => list.name === value)?.id)
             addGroceryItem({
                 name: itemForm.name,
                 description: itemForm.description,
